@@ -20,4 +20,8 @@ public class CategoriaService {
     public Iterable<Categoria> listarCategorias(){
         return categoriaRepository.findAll();
     }
+
+    public void deletarCategoria(int id){
+        categoriaRepository.deleteById(id);
+    }
 }

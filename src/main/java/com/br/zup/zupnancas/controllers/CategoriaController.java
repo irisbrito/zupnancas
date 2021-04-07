@@ -21,4 +21,9 @@ public class CategoriaController {
     public Iterable<Categoria> listarCategorias(){
         return categoriaService.listarCategorias();
     }
+
+    @DeleteMapping
+    public void deletarCategoria(@PathVariable int id){
+        categoriaService.deletarCategoria(id);
+    }
 }
