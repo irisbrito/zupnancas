@@ -18,4 +18,7 @@ public class CreditoService {
         return creditoRepository.save(credito);
     }
 
+    public Iterable<Credito> pesquisarTodosOsCreditos(){
+        return creditoRepository.findAll();
+    }
 }
