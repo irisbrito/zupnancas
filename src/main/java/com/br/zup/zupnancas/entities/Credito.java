@@ -14,6 +14,9 @@ public class Credito {
     private String descricao;
     private LocalDate dataDeEntrada;
 
+    @ManyToOne
+    private Saldo saldo;
+
     public Credito() {
     }
 
