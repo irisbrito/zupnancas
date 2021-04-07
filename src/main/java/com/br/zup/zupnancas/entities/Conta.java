@@ -19,6 +19,12 @@ public class Conta {
     private LocalDate dataDeVencimento;
     private Status status;
 
+    @ManyToOne
+    private Saldo saldo;
+
+    @ManyToMany
+    private Categoria categoria;
+
     public Conta() {
     }
 
