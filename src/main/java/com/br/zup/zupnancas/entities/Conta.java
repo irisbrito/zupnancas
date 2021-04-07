@@ -1,5 +1,7 @@
 package com.br.zup.zupnancas.entities;
 
+import com.br.zup.zupnancas.enums.Status;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 

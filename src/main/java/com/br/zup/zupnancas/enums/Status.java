@@ -1,4 +1,4 @@
-package com.br.zup.zupnancas.entities;
+package com.br.zup.zupnancas.enums;
 
 public enum Status {
     AGUARDANDO,
