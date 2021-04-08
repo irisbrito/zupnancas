@@ -17,12 +17,21 @@ public class ContaService {
     public Conta cadastrarConta(Conta conta){
         conta.setDataDeEntrada(LocalDate.now());
         validarStatusDaConta(conta);
+        verificarSeAContaEstaAtrasada(conta);
         return contaRepository.save(conta);
     }
 
     public void validarStatusDaConta(Conta conta) {
         if (conta.getStatus() == Status.PAGO) {
             throw new RuntimeException("Não é possível cadastrar uma conta paga");
+        }
+    }
+
+    public void verificarSeAContaEstaAtrasada(Conta conta){
+        LocalDate today = LocalDate.now();
+
+        if (today.isAfter(conta.getDataDeVencimento())) {
+            conta.setStatus(Status.ATRASADO);
         }
     }
 }
