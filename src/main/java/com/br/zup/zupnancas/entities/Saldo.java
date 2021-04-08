@@ -1,5 +1,7 @@
 package com.br.zup.zupnancas.entities;
 
+import org.hibernate.validator.constraints.br.CPF;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -7,6 +9,7 @@ import javax.persistence.Id;
 public class Saldo {
 
     @Id
+    @CPF(message = "CPF inválido")
     private String cpf;
     private double valor;
     private double limite;
