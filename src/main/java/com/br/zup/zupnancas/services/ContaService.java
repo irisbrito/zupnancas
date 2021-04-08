@@ -1,5 +1,6 @@
 package com.br.zup.zupnancas.services;
 
+import com.br.zup.zupnancas.entities.Categoria;
 import com.br.zup.zupnancas.entities.Conta;
 import com.br.zup.zupnancas.enums.Status;
 import com.br.zup.zupnancas.repositories.ContaRepository;
@@ -7,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Service
 public class ContaService {
@@ -14,10 +16,14 @@ public class ContaService {
     @Autowired
     private ContaRepository contaRepository;
 
+    @Autowired
+    private CategoriaService categoriaService;
+
     public Conta cadastrarConta(Conta conta){
         conta.setDataDeEntrada(LocalDate.now());
         validarStatusDaConta(conta);
         verificarSeAContaEstaAtrasada(conta);
+
         return contaRepository.save(conta);
     }
 
@@ -34,4 +40,16 @@ public class ContaService {
             conta.setStatus(Status.ATRASADO);
         }
     }
+
+    public Conta atualizarConta(Conta conta) {
+        if (contaRepository.existsById(conta.getId())) {
+            Conta objetoConta = cadastrarConta(conta);
+
+            return conta;
+        }
+
+        throw new RuntimeException("Conta não encontrada");
+    }
+
+
 }
