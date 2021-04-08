@@ -7,6 +7,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ContaDTO {
 
@@ -73,5 +75,28 @@ public class ContaDTO {
         conta.setValor(valor);
 
         return conta;
+    }
+
+    public static Iterable<ContaDTO> converterIterableDeModelParaDTO(Iterable<Conta> contas){
+        List<ContaDTO> contasDTOS = new ArrayList<>();
+
+        for(Conta conta : contas){
+            contasDTOS.add(converterModelParaDTO(conta));
+        }
+
+        return contasDTOS;
+    }
+
+    public static ContaDTO converterModelParaDTO(Conta conta){
+        ContaDTO contasDTO = new ContaDTO();
+
+        contasDTO.setDescricao(conta.getDescricao());
+        contasDTO.setStatus(conta.getStatus());
+        contasDTO.setDataDeVencimento(conta.getDataDeVencimento());
+        contasDTO.setValor(conta.getValor());
+        contasDTO.setId(conta.getId());
+
+        return contasDTO;
+
     }
 }
