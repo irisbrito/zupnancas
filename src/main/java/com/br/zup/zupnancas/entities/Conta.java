@@ -22,10 +22,15 @@ public class Conta {
     @ManyToOne
     private Saldo saldo;
 
-    @ManyToMany
-    private Categoria categoria;
-
     public Conta() {
+    }
+
+    public Saldo getSaldo() {
+        return saldo;
+    }
+
+    public void setSaldo(Saldo saldo) {
+        this.saldo = saldo;
     }
 
     public int getId() {
