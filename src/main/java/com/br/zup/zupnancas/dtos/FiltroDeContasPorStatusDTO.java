@@ -16,4 +16,5 @@ public class FiltroDeContasPorStatusDTO {
     public void setStatus(Status status) {
         this.status = status;
     }
+
 }
