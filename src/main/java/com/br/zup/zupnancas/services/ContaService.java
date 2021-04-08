@@ -1,6 +1,6 @@
 package com.br.zup.zupnancas.services;
 
-import com.br.zup.zupnancas.entities.Categoria;
+import com.br.zup.zupnancas.dtos.FiltroDeContasPorStatusDTO;
 import com.br.zup.zupnancas.entities.Conta;
 import com.br.zup.zupnancas.enums.Status;
 import com.br.zup.zupnancas.repositories.ContaRepository;
@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.List;
 
 @Service
 public class ContaService {
@@ -49,6 +48,14 @@ public class ContaService {
         }
 
         throw new RuntimeException("Conta não encontrada");
+    }
+
+    public Iterable<Conta> pesquisarContasPeloStatus(FiltroDeContasPorStatusDTO filtro){
+        if(filtro.getStatus() == null){
+            return contaRepository.findAll();
+        }
+
+        return contaRepository.findAllByStatus(filtro.getStatus());
     }
 
 
