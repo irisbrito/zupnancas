@@ -1,5 +1,7 @@
 package com.br.zup.zupnancas.services;
 
+import com.br.zup.zupnancas.entities.Conta;
+import com.br.zup.zupnancas.entities.Credito;
 import com.br.zup.zupnancas.entities.Saldo;
 import com.br.zup.zupnancas.repositories.SaldoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +19,25 @@ public class SaldoService {
        return saldoRepository.save(saldo);
     }
 
-    public Optional<Saldo> visualizarSaldo(String cpf){
-        return saldoRepository.findById(cpf);
+    public Saldo pesquisarSaldo(String cpf){
+        Optional<Saldo> optionalSaldo = saldoRepository.findById(cpf);
+
+
+        if (optionalSaldo.isEmpty()) {
+            throw new RuntimeException("CPF não cadastrado" + cpf);
+        }
+
+        return optionalSaldo.get();
+    }
+
+
+    public void creditarSaldo(Credito credito) {
+
+        Saldo saldo = pesquisarSaldo(credito.getSaldo().getCpf());
+        Double valorAtualizado = saldo.getValor() + credito.getValor();
+        saldo.setValor(valorAtualizado);
+
+        saldoRepository.save(saldo);
     }
 
 }
