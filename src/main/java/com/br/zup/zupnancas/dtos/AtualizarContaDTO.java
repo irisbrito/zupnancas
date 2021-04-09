@@ -4,7 +4,6 @@ import com.br.zup.zupnancas.entities.Conta;
 import com.br.zup.zupnancas.entities.Saldo;
 import com.br.zup.zupnancas.enums.Status;
 
-import javax.persistence.ManyToOne;
 import java.time.LocalDate;
 
 public class AtualizarContaDTO {
@@ -13,11 +12,17 @@ public class AtualizarContaDTO {
     private String descricao;
     private LocalDate dataDeVencimento;
     private Status status;
-
-    @ManyToOne
-    private Saldo saldo;
+    private String cpf;
 
     public AtualizarContaDTO() {
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
     }
 
     public double getValor() {
@@ -52,23 +57,19 @@ public class AtualizarContaDTO {
         this.status = status;
     }
 
-    public Saldo getSaldo() {
-        return saldo;
-    }
-
-    public void setSaldo(Saldo saldo) {
-        this.saldo = saldo;
-    }
 
     public Conta converterDTOParaConta(int id){
         Conta conta = new Conta();
+        Saldo saldo = new Saldo();
+        saldo.setCpf(this.cpf);
+
         conta.setId(id);
         conta.setValor(this.valor);
         conta.setDataDeVencimento(this.dataDeVencimento);
         conta.setStatus(this.status);
         conta.setDescricao(this.descricao);
         conta.setDataDeEntrada(conta.getDataDeEntrada());
-        conta.setSaldo(conta.getSaldo());
+        conta.setSaldo(saldo);
 
         return conta;
 
