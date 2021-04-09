@@ -1,6 +1,7 @@
 package com.br.zup.zupnancas.dtos;
 
 import com.br.zup.zupnancas.entities.Conta;
+import com.br.zup.zupnancas.entities.Saldo;
 import com.br.zup.zupnancas.enums.Status;
 
 import javax.persistence.GeneratedValue;
@@ -20,8 +21,17 @@ public class ContaDTO {
     private String descricao;
     private LocalDate dataDeVencimento;
     private Status status;
+    private String cpf;
 
     public ContaDTO() {
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
     }
 
     public int getId() {
@@ -66,6 +76,8 @@ public class ContaDTO {
 
     public Conta converterParaConta(){
         Conta conta = new Conta();
+        Saldo saldo = new Saldo();
+        saldo.setCpf(cpf);
 
         conta.setId(id);
         conta.setDataDeEntrada(LocalDate.now());
@@ -73,6 +85,7 @@ public class ContaDTO {
         conta.setStatus(status);
         conta.setDataDeVencimento(dataDeVencimento);
         conta.setValor(valor);
+        conta.setSaldo(saldo);
 
         return conta;
     }
@@ -95,8 +108,10 @@ public class ContaDTO {
         contasDTO.setDataDeVencimento(conta.getDataDeVencimento());
         contasDTO.setValor(conta.getValor());
         contasDTO.setId(conta.getId());
+        contasDTO.setCpf(conta.getSaldo().getCpf());
 
         return contasDTO;
 
     }
+
 }
