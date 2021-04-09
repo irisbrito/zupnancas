@@ -1,5 +1,6 @@
 package com.br.zup.zupnancas.controllers;
 
+import com.br.zup.zupnancas.dtos.CreditoDTO;
 import com.br.zup.zupnancas.entities.Credito;
 import com.br.zup.zupnancas.services.CreditoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +14,8 @@ public class CreditoController {
     private CreditoService creditoService;
 
     @PostMapping
-    public Credito cadastrarCredito(@RequestBody Credito credito){
-        return creditoService.cadastrarCredito(credito);
+    public Credito cadastrarCredito(@RequestBody CreditoDTO credito){
+        return creditoService.cadastrarCredito(credito.converterDTO());
     }
 
     @GetMapping
