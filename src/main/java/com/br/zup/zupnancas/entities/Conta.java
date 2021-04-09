@@ -4,6 +4,7 @@ import com.br.zup.zupnancas.enums.Status;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Objects;
 
 @Entity
 @Table(name = "contas")
@@ -12,14 +13,13 @@ public class Conta {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
     private double valor;
     private String descricao;
     private LocalDate dataDeEntrada;
     private LocalDate dataDeVencimento;
     private Status status;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     private Saldo saldo;
 
     public Conta() {
@@ -80,4 +80,5 @@ public class Conta {
     public void setStatus(Status status) {
         this.status = status;
     }
+
 }
