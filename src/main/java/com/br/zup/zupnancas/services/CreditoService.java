@@ -10,19 +10,20 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class CreditoService {
 
-    @Autowired
     private CreditoRepository creditoRepository;
-
-    @Autowired
     private SaldoService saldoService;
+    private CategoriaService categoriaService;
 
     @Autowired
-    private CategoriaService categoriaService;
+    public CreditoService(CreditoRepository creditoRepository, SaldoService saldoService, CategoriaService categoriaService) {
+        this.creditoRepository = creditoRepository;
+        this.saldoService = saldoService;
+        this.categoriaService = categoriaService;
+    }
 
     public Credito cadastrarCredito(Credito credito){
         credito.setDataDeEntrada(LocalDate.now());
