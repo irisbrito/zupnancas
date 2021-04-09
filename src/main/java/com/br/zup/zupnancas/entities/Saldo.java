@@ -4,8 +4,10 @@ import org.hibernate.validator.constraints.br.CPF;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "saldos")
 public class Saldo {
 
     @Id
