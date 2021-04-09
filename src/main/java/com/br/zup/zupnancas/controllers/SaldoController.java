@@ -5,8 +5,6 @@ import com.br.zup.zupnancas.services.SaldoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
-
 @RestController
 @RequestMapping("saldos/")
 public class SaldoController {
@@ -20,8 +18,7 @@ public class SaldoController {
     }
 
     @GetMapping("{cpf}/")
-    public Optional<Saldo> visualizarSaldo(@PathVariable String cpf){
-        return saldoService.visualizarSaldo(cpf);
+    public Saldo visualizarSaldo(@PathVariable String cpf){
+        return saldoService.pesquisarSaldo(cpf);
     }
-
 }
