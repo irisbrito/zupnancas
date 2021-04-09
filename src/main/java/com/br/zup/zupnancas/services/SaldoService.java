@@ -22,7 +22,6 @@ public class SaldoService {
     public Saldo pesquisarSaldo(String cpf){
         Optional<Saldo> optionalSaldo = saldoRepository.findById(cpf);
 
-
         if (optionalSaldo.isEmpty()) {
             throw new RuntimeException("CPF não cadastrado" + cpf);
         }
@@ -30,9 +29,7 @@ public class SaldoService {
         return optionalSaldo.get();
     }
 
-
     public void creditarSaldo(Credito credito) {
-
         Saldo saldo = pesquisarSaldo(credito.getSaldo().getCpf());
         Double valorAtualizado = saldo.getValor() + credito.getValor();
         saldo.setValor(valorAtualizado);
@@ -40,4 +37,18 @@ public class SaldoService {
         saldoRepository.save(saldo);
     }
 
+    public boolean debitar(Conta conta){
+        Saldo saldo = pesquisarSaldo(conta.getSaldo().getCpf());
+        double novoSaldo = saldo.getValor() + saldo.getLimite();
+
+        if(novoSaldo > conta.getValor()){
+            novoSaldo = saldo.getValor() - conta.getValor();
+            saldo.setValor(novoSaldo);
+            saldoRepository.save(saldo);
+
+            return true;
+        }
+
+        return false;
+    }
 }
