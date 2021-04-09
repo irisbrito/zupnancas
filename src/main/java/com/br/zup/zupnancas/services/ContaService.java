@@ -9,19 +9,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.Optional;
 
 @Service
 public class ContaService {
 
-    @Autowired
     private ContaRepository contaRepository;
-
-    @Autowired
     private CategoriaService categoriaService;
+    private SaldoService saldoService;
 
     @Autowired
-    private SaldoService saldoService;
+    public ContaService(ContaRepository contaRepository, CategoriaService categoriaService, SaldoService saldoService) {
+        this.contaRepository = contaRepository;
+        this.categoriaService = categoriaService;
+        this.saldoService = saldoService;
+    }
 
     public Conta cadastrarConta(Conta conta){
         conta.setDataDeEntrada(LocalDate.now());
@@ -60,7 +61,6 @@ public class ContaService {
         throw new RuntimeException("Conta não encontrada");
     }
 
-
     public Iterable<Conta> pesquisarContasPeloStatus(FiltroDeContasPorStatusDTO filtro){
         if(filtro.getStatus() == null){
             return contaRepository.findAll();
@@ -68,6 +68,5 @@ public class ContaService {
 
         return contaRepository.findAllByStatus(filtro.getStatus());
     }
-
 
 }
