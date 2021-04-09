@@ -24,6 +24,11 @@ public class ContaService {
         this.saldoService = saldoService;
     }
 
+    /**
+     * Método para cadastrar conta
+     * @param conta
+     * @return conta
+     */
     public Conta cadastrarConta(Conta conta){
         conta.setDataDeEntrada(LocalDate.now());
         validarStatusDaConta(conta);
@@ -34,12 +39,20 @@ public class ContaService {
         return contaRepository.save(conta);
     }
 
+    /**
+     * Método para validar o status da conta
+     * @param conta
+     */
     public void validarStatusDaConta(Conta conta) {
         if (conta.getStatus() == Status.PAGO) {
             throw new RuntimeException("Não é possível cadastrar uma conta paga");
         }
     }
 
+    /**
+     * Método que faz a validação se a conta cadastrada está atrasada
+     * @param conta
+     */
     public void verificarSeAContaEstaAtrasada(Conta conta){
         LocalDate today = LocalDate.now();
 
@@ -48,6 +61,11 @@ public class ContaService {
         }
     }
 
+    /**
+     * Método de atualização da conta
+     * @param conta
+     * @return
+     */
     public Conta atualizarConta(Conta conta) {
         if (contaRepository.existsById(conta.getId())) {
             if(conta.getStatus() == Status.PAGO) {
@@ -61,6 +79,11 @@ public class ContaService {
         throw new RuntimeException("Conta não encontrada");
     }
 
+    /**
+     * Método de busca de contas pelo status
+     * @param filtro
+     * @return
+     */
     public Iterable<Conta> pesquisarContasPeloStatus(FiltroDeContasPorStatusDTO filtro){
         if(filtro.getStatus() == null){
             return contaRepository.findAll();
