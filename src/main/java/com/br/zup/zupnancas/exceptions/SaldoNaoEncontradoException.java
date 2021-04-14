@@ -3,7 +3,7 @@ package com.br.zup.zupnancas.exceptions;
 public class SaldoNaoEncontradoException extends RuntimeException {
 
     private int Status = 400;
-    private String campo = "id";
+    private String campo = "cpf";
     private String razaoDoErro = "Bad request";
     private String tipoDoErro = "CPF não cadastrado";
 
