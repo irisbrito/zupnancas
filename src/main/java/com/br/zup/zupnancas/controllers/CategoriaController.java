@@ -17,6 +17,11 @@ public class CategoriaController {
         return categoriaService.cadastrarCategoria(categoria);
     }
 
+    @GetMapping("{id}/")
+    public Categoria pesquisarCategoriaPorId(@PathVariable int id){
+        return categoriaService.buscarCategoriaPeloId(id);
+    }
+
     @GetMapping
     public Iterable<Categoria> listarCategorias(){
         return categoriaService.listarCategorias();
