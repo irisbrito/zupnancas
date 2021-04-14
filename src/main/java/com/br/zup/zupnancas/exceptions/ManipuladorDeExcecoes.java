@@ -25,5 +25,13 @@ public class ManipuladorDeExcecoes extends ResponseEntityExceptionHandler {
         return ResponseEntity.status(status).body(respostaDeErro);
     }
 
+    private List<ObjetoDeErro> getErros(MethodArgumentNotValidException exception){
+        List<ObjetoDeErro> objetosDeErro = exception.getBindingResult()
+                .getFieldErrors().stream()
+                .map(erro -> new ObjetoDeErro(erro.getDefaultMessage(), erro.getField()))
+                .collect(Collectors.toList());
+
+        return objetosDeErro;
+    }
 
 }
