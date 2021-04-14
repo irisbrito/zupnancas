@@ -5,6 +5,7 @@ import com.br.zup.zupnancas.entities.Conta;
 import com.br.zup.zupnancas.entities.Saldo;
 import com.br.zup.zupnancas.enums.Status;
 import com.br.zup.zupnancas.exceptions.CadastroDeContaPagaException;
+import com.br.zup.zupnancas.exceptions.ContaNaoEncontradaException;
 import com.br.zup.zupnancas.repositories.ContaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -77,7 +78,7 @@ public class ContaService {
             return cadastrarConta(conta);
         }
 
-        throw new RuntimeException("Conta não encontrada");
+        throw new ContaNaoEncontradaException("Conta não encontrada");
     }
 
     /**
