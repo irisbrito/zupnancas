@@ -2,14 +2,14 @@ package com.br.zup.zupnancas.exceptions;
 
 public class ObjetoDeErro {
     private String mensagem;
-    private String campoDoErro;
+    private String campo;
 
     public ObjetoDeErro() {
     }
 
     public ObjetoDeErro(String mensagem, String campoDoErro) {
         this.mensagem = mensagem;
-        this.campoDoErro = campoDoErro;
+        this.campo = campoDoErro;
     }
 
     public String getMensagem() {
@@ -20,11 +20,11 @@ public class ObjetoDeErro {
         this.mensagem = mensagem;
     }
 
-    public String getCampoDoErro() {
-        return campoDoErro;
+    public String getCampo() {
+        return campo;
     }
 
     public void setCampoDoErro(String campoDoErro) {
-        this.campoDoErro = campoDoErro;
+        this.campo = campoDoErro;
     }
 }

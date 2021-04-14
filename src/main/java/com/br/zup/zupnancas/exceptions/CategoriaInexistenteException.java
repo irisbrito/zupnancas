@@ -3,9 +3,10 @@ package com.br.zup.zupnancas.exceptions;
 public class CategoriaInexistenteException extends RuntimeException {
 
     private int Status = 400;
-    private String campo;
-    private String razaoDoErro;
-    private String tipoDoErro;
+    private String campo = "id";
+    private String razaoDoErro = "Bad request";
+    private String tipoDoErro = "Categoria não existe";
+
 
     public CategoriaInexistenteException(String message) {
         super(message);
