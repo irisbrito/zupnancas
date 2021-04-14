@@ -1,6 +1,7 @@
 package com.br.zup.zupnancas.services;
 
 import com.br.zup.zupnancas.entities.Categoria;
+import com.br.zup.zupnancas.exceptions.CategoriaInexistenteException;
 import com.br.zup.zupnancas.repositories.CategoriaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -45,7 +46,7 @@ public class CategoriaService {
             return optionalAlbum.get();
         }
 
-        throw new RuntimeException("Categoria não existe");
+        throw new CategoriaInexistenteException("Categoria não existe");
    }
 
     /**
