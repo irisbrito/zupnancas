@@ -3,6 +3,7 @@ package com.br.zup.zupnancas.services;
 import com.br.zup.zupnancas.entities.Conta;
 import com.br.zup.zupnancas.entities.Credito;
 import com.br.zup.zupnancas.entities.Saldo;
+import com.br.zup.zupnancas.exceptions.SaldoNaoEncontradoException;
 import com.br.zup.zupnancas.repositories.SaldoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,7 +34,7 @@ public class SaldoService {
         Optional<Saldo> optionalSaldo = saldoRepository.findById(cpf);
 
         if (optionalSaldo.isEmpty()) {
-            throw new RuntimeException("CPF não cadastrado" + cpf);
+            throw new SaldoNaoEncontradoException("CPF não cadastrado: " + cpf);
         }
 
         return optionalSaldo.get();

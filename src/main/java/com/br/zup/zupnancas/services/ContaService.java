@@ -4,6 +4,8 @@ import com.br.zup.zupnancas.dtos.FiltroDeContasPorStatusDTO;
 import com.br.zup.zupnancas.entities.Conta;
 import com.br.zup.zupnancas.entities.Saldo;
 import com.br.zup.zupnancas.enums.Status;
+import com.br.zup.zupnancas.exceptions.CadastroDeContaPagaException;
+import com.br.zup.zupnancas.exceptions.ContaNaoEncontradaException;
 import com.br.zup.zupnancas.repositories.ContaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -45,7 +47,7 @@ public class ContaService {
      */
     public void validarStatusDaConta(Conta conta) {
         if (conta.getStatus() == Status.PAGO) {
-            throw new RuntimeException("Não é possível cadastrar uma conta paga");
+            throw new CadastroDeContaPagaException("Não é possível cadastrar uma conta paga");
         }
     }
 
@@ -76,7 +78,7 @@ public class ContaService {
             return cadastrarConta(conta);
         }
 
-        throw new RuntimeException("Conta não encontrada");
+        throw new ContaNaoEncontradaException("Conta não encontrada");
     }
 
     /**
