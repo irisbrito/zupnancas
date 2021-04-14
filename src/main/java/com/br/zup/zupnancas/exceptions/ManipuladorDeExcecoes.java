@@ -47,4 +47,13 @@ public class ManipuladorDeExcecoes extends ResponseEntityExceptionHandler {
         return respostaDeErro;
     }
 
+    @ExceptionHandler({SaldoNaoEncontradoException.class})
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public RespostaDeErro manipularSaldoNaoEncontrado(SaldoNaoEncontradoException erro){
+        ObjetoDeErro objetoDeErro = new ObjetoDeErro(erro.getMessage(), erro.getCampo());
+        RespostaDeErro respostaDeErro = new RespostaDeErro(erro.getTipoDoErro(), erro.getStatus(), erro.getRazaoDoErro(),
+                Arrays.asList(objetoDeErro));
+
+        return respostaDeErro;
+    }
 }
