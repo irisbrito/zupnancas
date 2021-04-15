@@ -3,10 +3,12 @@ package com.br.zup.zupnancas.dtos;
 import com.br.zup.zupnancas.entities.Conta;
 import com.br.zup.zupnancas.entities.Saldo;
 import com.br.zup.zupnancas.enums.Status;
+import org.hibernate.validator.constraints.br.CPF;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,11 +18,15 @@ public class ContaDTO {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
+    @NotNull(message = "O valor deve ser informado")
     private double valor;
+    @NotNull(message = "Informe a descrição")
     private String descricao;
+    @NotNull(message = "Informe a data de vencimento da conta")
     private LocalDate dataDeVencimento;
+    @NotNull(message = "Informe o status correto da conta")
     private Status status;
+    @CPF(message = "CPF inválido")
     private String cpf;
 
     public ContaDTO() {
