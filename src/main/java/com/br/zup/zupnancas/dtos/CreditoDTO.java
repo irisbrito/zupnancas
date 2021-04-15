@@ -3,16 +3,20 @@ package com.br.zup.zupnancas.dtos;
 import com.br.zup.zupnancas.entities.Categoria;
 import com.br.zup.zupnancas.entities.Credito;
 import com.br.zup.zupnancas.entities.Saldo;
+import org.hibernate.validator.constraints.br.CPF;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 public class CreditoDTO {
 
+    @NotNull(message = "Valor não pode ficar vazio")
     private double valor;
+    @NotNull(message = "O campo descrição não foi informado")
     private String descricao;
-
+    @NotNull(message = "Insira a(s) categoria(s)")
     private List<Categoria> categorias;
-
+    @CPF(message = "CPF invalido!")
     private String cpf;
 
     public CreditoDTO() {
